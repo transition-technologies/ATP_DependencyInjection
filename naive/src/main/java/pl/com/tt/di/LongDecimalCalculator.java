@@ -1,0 +1,35 @@
+package pl.com.tt.di;
+
+import pl.com.tt.di.system.LongDecimalNumeralSystem;
+
+public class LongDecimalCalculator {
+	private final LongDecimalNumeralSystem system;
+	
+	public LongDecimalCalculator() {
+		system = new LongDecimalNumeralSystem();
+	}
+	
+	public String add(final String first, final String second) {
+		final String result = system.add(first, second);
+		System.out.println(result);
+		return result;
+	}
+	
+	public String subtract(final String first, final String second) {
+		final String result = system.subtract(first, second);
+		System.out.println(result);
+		return result;
+	}
+	
+	public String multiply(final String first, final String second) {
+		final String result = system.multiply(first, second);
+		System.out.println(result);
+		return result;
+	}
+	
+	public String divide(final String first, final String second) {
+		final String result = system.divide(first, second);
+		System.out.println(result);
+		return result;
+	}
+}

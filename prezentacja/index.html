@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section><h1>Dependency Injection</h1><p>W teorii i praktyce</p><br /><p>Borys Piela</p></section><section><h2>Agenda</h2><div><ul><li class="fragment">Standardowa budowa aplikacji</li><li class="fragment">Inversion Of Control</li><li class="fragment">Dependency Injection</li></ul></div></section><section><section><h2>Standardowa budowa aplikacji</h2><div><ul><li class="fragment">obiekty same tworz&#261; inne obiekty kt&oacute;re s&#261; im potrzebne do wykonywania swoich zada&#324;;</li><li class="fragment">obiekty wiedz&#261; wszystko (implementacja, ilo&#347;&#263; obiekt&oacute;w, wynik operacji) na temat u&#380;ywanych obiekt&oacute;w.</li></ul><div style="text-align: left;" class="fragment"><pre><code><font face="courier new">public class LongDecimalCalculator {<br /></font><font face="courier new"><span style="white-space: pre;">&#9;</span>private final LongDecimalNumeralSystem system;<br /></font><span style="white-space: pre;"><font face="courier new">&#9;<br /></font></span><font face="courier new"><span style="white-space: pre;">&#9;</span>public LongDecimalCalculator() {<br /></font><font face="courier new"><span style="white-space: pre;">&#9;&#9;</span>system = new LongDecimalNumeralSystem();<br /></font><font face="courier new"><span style="white-space: pre;">&#9;</span>}<br /></font><span style="white-space: pre;"><font face="courier new">&#9;<br /></font></span><font face="courier new"><span style="white-space: pre;">&#9;</span>public String add(final String first, final String second) {<br /></font><font face="courier new"><span style="white-space: pre;">&#9;&#9;</span>return system.add(first, second);</font><font face="courier new"><br /></font><font face="courier new"><span style="white-space: pre;">&#9;</span>}</font></code></pre></div></div></section><section><h2>Standardowa budowa aplikacji</h2><h2><span style="text-align: left;letter-spacing: -0.02em;">Zalety:</span></h2><div><ul><li style="text-align: left;" class="fragment"><span style="letter-spacing: -0.02em;">&#322;atwo odnale&#378;&#263; si&#281; w kodzie oraz w przebiegu procesu dzia&#322;ania aplikacji.</span></li></ul><div style="text-align: left;"><br /></div><div style="text-align: left;"><h2 style="font-style: normal;font-variant: normal;text-align: center;"><span style="text-align: left;letter-spacing: -0.02em;">Wady:</span></h2><div><ul><li class="fragment">du&#380;a zale&#380;no&#347;&#263; mi&#281;dzy obiektami;</li><li class="fragment">utrudnione wprowadzanie zmian w dzia&#322;aniu aplikacji (tworzenie obiekt&oacute;w konkretnych klas w wielu miejscach);</li><li class="fragment">utrudnione testowanie aplikacji (brak mo&#380;liwo&#347;ci podmiany u&#380;ywanej implementacji).</li></ul></div></div><br /></div></section></section><section><section><h2>Inversion of control</h2><div><h2 style="font-style: normal;font-variant: normal;"><span style="text-align: left;letter-spacing: -0.02em;" class="fragment">Techniki:</span></h2></div><div><ol><li class="fragment"><span style="letter-spacing: -0.02em;">wstrzykiwanie zale&#380;no&#347;ci;</span><br /></li><li class="fragment"><span style="letter-spacing: -0.02em;">mechanizm zdarze&#324;;</span><br /></li><li class="fragment"><span style="letter-spacing: -0.02em;">programowanie aspektowe.</span><br /></li></ol><div style="text-align: left;" class="fragment">Ka&#380;dy kolejny poziom stwarza wi&#281;ksze mo&#380;liwo&#347;ci rozbudowy aplikacji ale jednocze&#347;nie powoduje wi&#281;ksz&#261; &quot;utrat&#281;&quot; kontroli nad jej dzia&#322;aniem.</div></div></section><section><h2 style="font-style: normal;font-variant: normal;">Inversion Of Control</h2><div style="font-size: 36.0px;font-style: normal;font-variant: normal;line-height: 43.1875px;letter-spacing: normal;text-transform: none;"><div style="font-size: 36.0px;font-style: normal;font-variant: normal;line-height: 43.1875px;"><h2 style="font-style: normal;font-variant: normal;"><span style="text-align: left;letter-spacing: -0.02em;">Zalety:</span></h2></div><div style="font-size: 36.0px;font-style: normal;font-variant: normal;line-height: 43.1875px;"><ul><li class="fragment">rozlu&#378;nienie powi&#261;za&#324; mi&#281;dzy obiektami;</li><li class="fragment">mo&#380;liwo&#347;&#263; podzia&#322;u aplikacji na niezale&#380;ne modu&#322;y;</li><li class="fragment">u&#322;atwione wprowadzanie zmian oraz rozbudowa aplikacji;</li><li class="fragment">u&#322;atwiony proces testowania automatycznego.</li></ul><div style="text-align: left;"><br /></div><div style="text-align: left;"><h2 style="font-style: normal;font-variant: normal;text-align: center;"><span style="text-align: left;letter-spacing: -0.02em;">Wady:</span></h2><div><ul><li class="fragment">utrudnione odnajdywanie przebiegu procesu dzia&#322;ania (co, kiedy, dlaczego i jak si&#281; wykona?).</li></ul></div></div></div></div><div><br /></div></section></section><section><section><h2>Dependency Injection</h2><div><ul><li class="fragment">obiekty dostaj&#261; swoj&#261; konfiguracj&#281; podczas ich tworzenia (konstruktory, metody zwane setter'ami);</li><li class="fragment">obiekty nie wiedz&#261; jakiej implementacji klasy u&#380;ywaj&#261;.</li></ul><div style="text-align: left;" class="fragment"><pre><code><font face="courier new">public class Calculator implements Calculate {<br /><span style="white-space: pre;">&#9;</span>private final NumeralSystem system;<br /><span style="white-space: pre;">&#9;<br /></span><span style="white-space: pre;">&#9;</span>public Calculator(final NumeralSystem system) {<br /><span style="white-space: pre;">&#9;&#9;</span>this.system = system;<br /><span style="white-space: pre;">&#9;</span>}<br /><span style="white-space: pre;">&#9;<br /></span><span style="white-space: pre;">&#9;</span>@Override<br /><span style="white-space: pre;">&#9;</span>public String add(final String first, final String second) {<br /><span style="white-space: pre;">&#9;&#9;</span>return system.add(first, second);<br /><span style="white-space: pre;">&#9;</span>}</font></code></pre></div></div></section><section><h2>Dependency Injection</h2><div><div style="font-size: 36.0px;font-style: normal;font-variant: normal;line-height: 43.1875px;"><h2 style="font-style: normal;font-variant: normal;"><span style="text-align: left;letter-spacing: -0.02em;">Zalety:</span></h2></div><div style="font-size: 36.0px;font-style: normal;font-variant: normal;line-height: 43.1875px;"><ul><li class="fragment">u&#322;atwione testowanie jednostkowe (r&oacute;&#380;na konfiguracja obiektu do test&oacute;w a inna na produkcji);</li><li class="fragment">u&#322;atwione testowanie integracyjne (mo&#380;liwo&#347;&#263; zast&#281;powania obiekt&oacute;w za&#347;lepkami (mock'ami) w celu pomini&#281;cia ich wp&#322;ywu na dzia&#322;anie testowanego obiektu).</li></ul><div style="text-align: left;"><br /></div><div style="text-align: left;"><h2 style="font-style: normal;font-variant: normal;text-align: center;"><span style="text-align: left;letter-spacing: -0.02em;">Wady:</span></h2><div><ul><li class="fragment">tworzenie obiektu wymaga najpierw stworzenia obiekt&oacute;w, z kt&oacute;rych b&#281;dzie on korzysta&#322;.</li></ul></div></div></div></div></section></section>	
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+		   window.addEventListener("mousedown", handleClick, false);
+		   window.addEventListener("contextmenu", function(e) {
+			e.preventDefault();
+		   }, false);
+
+		   function handleClick(e) {
+			e.preventDefault();
+			if (e.button === 0)
+			 Reveal.next();
+			if (e.button === 2)
+			 Reveal.prev();
+		   }
+		</script>
+		
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
